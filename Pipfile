@@ -4,7 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-py-translate = "*"
+speechrecognition = "*"
+pocketsphinx = "*"
+urllib3 = "==1.26.6"
 
 [dev-packages]
 
