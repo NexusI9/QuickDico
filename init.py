@@ -10,15 +10,20 @@ input_source_index = 0;
 
 def listen(source_index=0):
     r = sr.Recognizer()
-    mic = sr.Microphone(source_index)
-    return 
+    mic = sr.Microphone(device_index=source_index)
+    try:
+        with mic as source:
+                audio = r.listen(source,timeout=60,phrase_time_limit=3)
 
-    with mic as source:
-            audio = r.listen(source)
+        type(audio)
+        c = r.recognize_sphinx(audio, language='zh-cn')
+        print(c)
 
-    type(audio)
-    c = r.recognize_sphinx(audio, language='zh-cn')
-    print(c)
+    except sr.RequestError as e:
+        print("Could not request results; {0}".format(e))
+         
+    except sr.UnknownValueError:
+        print("unknown error occurred")
 
 
 def device():
